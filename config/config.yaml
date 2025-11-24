@@ -1,0 +1,17 @@
+app_name: DOH-EMS API
+environment: development
+
+server:
+  host: localhost
+  port: "8080"
+  readtimeout: 10
+  writetimeout: 10
+  idle_timeout: 120
+
+database:
+  host: localhost
+  port: 5432
+  user: "postgres"
+  password: "password"
+  name: "doh-ems"
+  ssl_mode: "disable"
