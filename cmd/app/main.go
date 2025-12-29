@@ -7,18 +7,21 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/yporn/doh-ems-api/config"
+	"github.com/yporn/doh-ems-api/internal/platform/database"
 )
 
 func main() {
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatalf("❌ failed to load config: %v", err)
-	}	
+	}
+
+	database.ConnectDB(cfg)
 
 	log.Printf("🚀 starting %s (env: %s)", cfg.AppName, cfg.Environment)
 
 	app := fiber.New(fiber.Config{
-		AppName: cfg.AppName,
+		AppName:      cfg.AppName,
 		ReadTimeout:  time.Duration(cfg.Server.ReadTimeout) * time.Second,
 		WriteTimeout: time.Duration(cfg.Server.WriteTimeout) * time.Second,
 		IdleTimeout:  time.Duration(cfg.Server.IdleTimeout) * time.Second,

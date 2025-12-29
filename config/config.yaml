@@ -9,9 +9,10 @@ server:
   idle_timeout: 120
 
 database:
-  host: localhost
+  host: 127.0.0.1
   port: 5432
-  user: "postgres"
+  user: "doh_ems"
   password: "password"
-  name: "doh-ems"
+  name: "doh_ems"
   ssl_mode: "disable"
+  timezone: Asia/Bangkok
