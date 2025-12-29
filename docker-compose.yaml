@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: doh_ems_db
+    environment:
+      POSTGRES_USER: doh_ems
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: doh_ems
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:6.0
+    container_name: doh_ems_mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pornwisay_db_user
+      MONGO_INITDB_ROOT_PASSWORD: 6Htiv72Xihd8p1Mg
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodata:/data/db
+
+  mongo-express:
+    image: mongo-express
+    container_name: doh_ems_mongo_ui
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: pornwisay_db_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 6Htiv72Xihd8p1Mg
+      ME_CONFIG_MONGODB_URL: mongodb://pornwisay_db_user:6Htiv72Xihd8p1Mg@mongo:27017/
+    depends_on:
+      - mongo
